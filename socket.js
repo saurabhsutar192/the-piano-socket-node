@@ -38,13 +38,11 @@ io.on("connection", (socket) => {
         broadcastRoom = room;
         callback(room);
       }
+    } else if (rooms.has(room)) {
+      socket.join(room);
+      callback(room);
     } else {
-      if (rooms.has(room)) {
-        socket.join(room);
-        callback(room);
-      } else {
-        callback(room, `Broadcaster doesn't exist!`);
-      }
+      callback(room, `Broadcaster doesn't exist!`);
     }
   });
 
